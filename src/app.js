@@ -1,22 +1,21 @@
 import React from 'react';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 
-const App = (props) => {
-  return (
-    <Fabric>
+const Header = ({ message }) => {
+  return(
+
       <h2 className="ms-textAlignCenter">
-        {props.headerMessage}
+        {message}
       </h2>
-    </Fabric>
   );
 };
 
-App.propTypes = {
-  headerMessage: React.PropTypes.string.isRequired
+const App = (props) => {
+  return (
+    <Fabric>
+      <Header message="Naming contexts"/>
+    </Fabric>
+  );
 };
-
-App.defaultProps = {
-   headerMessage: 'Hello!!'
- };
 
 export default App;
