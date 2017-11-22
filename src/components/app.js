@@ -1,14 +1,6 @@
 import React from 'react';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
-
-const Header = ({ message }) => {
-  return(
-
-      <h2 className="ms-textAlignCenter">
-        {message}
-      </h2>
-  );
-};
+import Header from './header';
 
 const App = (props) => {
   return (
