@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 import Header from './header';
 
-const App = (props) => {
-  return (
-    <Fabric>
-      <Header message="Naming contexts"/>
-    </Fabric>
-  );
-};
+class App extends Component {
+  // constructor() {
+
+  //}
+
+  state = {
+    pageHeader: 'Nanimg Contests'
+  };
+
+  render() {
+    return (
+      <Fabric>
+        <Header message={this.state.pageHeader}/>
+      </Fabric>
+    );
+  }
+}
 
 export default App;
