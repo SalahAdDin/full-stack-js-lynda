@@ -11,6 +11,14 @@ class App extends Component {
     pageHeader: 'Nanimg Contests'
   };
 
+  componentDidMount(){
+
+  }
+
+  componentWillUnMount(){
+    
+  }
+
   render() {
     return (
       <Fabric>
