@@ -4,7 +4,7 @@
   "description": "Project developed by lynda tutorials.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node node server.js --ignore public/",
+    "start": "nodemon --exec babel-node server.js --ignore public/",
     "dev": "webpack -wd",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +25,7 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mongodb": "^2.2.33",
+    "office-ui-fabric-react": "^5.24.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
   },
