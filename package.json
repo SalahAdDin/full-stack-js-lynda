@@ -22,6 +22,7 @@
   "author": "José Luis Sandoval Alaguna",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.16.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "json-loader": "^0.5.7",
