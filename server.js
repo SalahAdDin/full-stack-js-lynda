@@ -1,9 +1,11 @@
 import config from './config';
 import apiRouter from './api';
+import serverRender from './serverRender';
+
 // import sassMiddleware from 'node-sass-middleware';
 import path from 'path';
-
 import express from 'express';
+
 const server = express();
 
 /*
@@ -14,8 +16,6 @@ server.use(sassMiddleware({
 */
 
 server.set('view engine', 'ejs');
-
-import serverRender from './serverRender';
 
 server.get('/', (req, res) => {
   serverRender()

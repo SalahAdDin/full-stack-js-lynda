@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 
 import Header from './header';
-import ContestPreview from './contestpreview';
+import ContestList from './contestlist';
 
 class App extends Component {
   state = {
@@ -18,11 +18,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header message={this.state.pageHeader} />
-        <div>
-          {this.state.contests.map(contest =>
-            <ContestPreview key={contest.id} {...contest} />
-          )}
-        </div>
+        <ContestList contests={this.state.contests} />
       </div>
     );
   }
