@@ -1,40 +1,34 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
-import ContestsPreview from './contestspreview';
+
 import Header from './header';
+import ContestPreview from './contestpreview';
 
 class App extends Component {
-  // constructor() {
-
-  //}
-
   state = {
-    pageHeader: 'Nanimg Contests',
-    contests: []
+    pageHeader: 'Naming Contests',
+    contests: this.props.initialContests
   };
-
-  componentDidMount(){
-    axios.get('/api/contests').then(
-      resp => {
+  componentDidMount() {
+    axios.get('/api/contests')
+      .then(resp => {
         this.setState({
-          contests: resp.data.contest
+          contests: resp.data.contests
         });
-      }
-    ).catch(console.error);
+      })
+      .catch(console.error);
   }
-
-  componentWillUnMount(){
-
+  componentWillUnmount() {
+    // clean timers, listeners
   }
-
   render() {
     return (
-      <Fabric>
-        <Header message={this.state.pageHeader}/>
+      <Fabric className="App">
+        <Header message={this.state.pageHeader} />
         <div>
-          {this.state.contests.map(
-            contest => <ContestsPreview key={contest.id} {...contest} />
+          {this.state.contests.map(contest =>
+            <ContestPreview key={contest.id} {...contest} />
           )}
         </div>
       </Fabric>
