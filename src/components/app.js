@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 // import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 
 import Header from './header';
@@ -9,10 +9,11 @@ import * as api from '../api';
 const pushState = (obj, url) => window.history.pushState(obj,'', url);
 
 class App extends Component {
-  state = {
-    pageHeader: 'Naming Contests',
-    contests: this.props.initialContests
+  static propType = {
+    // initialData: PropTypes.object.isRequired
   };
+
+  state = this.props.initialData;
 
   componentDidMount() {
   }
@@ -29,7 +30,6 @@ class App extends Component {
 
     api.fetchContest(contestId).then(contest => {
       this.setState({
-        pageHeader: contest.contestName,
         currentContestId: contest.id,
         contest: {
           ...this.state.contest,
@@ -39,9 +39,21 @@ class App extends Component {
     });
   };
 
+  currentContest(){
+    return this.state.contests[this.state.currentContestId];
+  }
+
+  pageHeader() {
+    if (this.state.currentContestId) {
+      return this.currentContest().contestName;
+    }
+
+    return 'Naming Contests';
+  }
+
   currentContent(){
     if(this.state.currentContestId){
-      return <Contest {...this.state.contests[this.state.currentContestId]} />;
+      return <Contest {...this.currentContest()} />;
     }
     return <ContestList
       onContestClick={this.fetchContest}
@@ -51,7 +63,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header message={this.state.pageHeader} />
+        <Header message={this.pageHeader()} />
         {this.currentContent()}
       </div>
     );
