@@ -29,6 +29,7 @@
     "mongodb": "^2.2.33",
     "node-sass-middleware": "^0.11.0",
     "office-ui-fabric-react": "^5.24.2",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
   },

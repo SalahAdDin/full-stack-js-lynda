@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import axios from 'axios';
 
-import App from './src/components/app';
 import config from './config';
+import App from './src/components/app';
 
 const getApiUrl = contestId => {
   if (contestId) {
     return `${config.serverUrl}/api/contests/${contestId}`;
   }
-  return `${config.serverUrl/api/contests}`;
+  return `${config.serverUrl}/api/contests`;
 };
 
 const getInitialData = (contestId, apiData) => {

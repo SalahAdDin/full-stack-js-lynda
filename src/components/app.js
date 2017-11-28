@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // import { Fabric } from 'office-ui-fabric-react/lib/Fabric';
 
 import Header from './header';
@@ -8,37 +9,40 @@ import * as api from '../api';
 
 const pushState = (obj, url) => window.history.pushState(obj,'', url);
 
-class App extends Component {
-  static propType = {
-    // initialData: PropTypes.object.isRequired
+const onPopState = handler => {
+  window.onpopstate = handler;
+};
+
+class App extends React.Component {
+  static propTypes = {
+    initialData: PropTypes.object.isRequired
   };
-
   state = this.props.initialData;
-
   componentDidMount() {
+    onPopState((event) => {
+      this.setState({
+        currentContestId: (event.state || {}).currentContestId
+      });
+    });
   }
-
   componentWillUnmount() {
-    // clean timers, listeners
+    onPopState(null);
   }
-
   fetchContest = (contestId) => {
     pushState(
       { currentContestId: contestId },
       `/contest/${contestId}`
     );
-
     api.fetchContest(contestId).then(contest => {
       this.setState({
         currentContestId: contest._id,
-        contest: {
-          ...this.state.contest,
+        contests: {
+          ...this.state.contests,
           [contest._id]: contest
         }
       });
     });
   };
-
   fetchContestList = () => {
     pushState(
       { currentContestId: null },
@@ -51,9 +55,8 @@ class App extends Component {
       });
     });
   };
-
-  fetchNames = (nameIds) =>{
-    if (nameIds.length === 0){
+  fetchNames = (nameIds) => {
+    if (nameIds.length === 0) {
       return;
     }
     api.fetchNames(nameIds).then(names => {
@@ -62,11 +65,9 @@ class App extends Component {
       });
     });
   };
-
-  currentContest(){
+  currentContest() {
     return this.state.contests[this.state.currentContestId];
   }
-
   pageHeader() {
     if (this.state.currentContestId) {
       return this.currentContest().contestName;
@@ -74,29 +75,27 @@ class App extends Component {
 
     return 'Naming Contests';
   }
-
   lookupName = (nameId) => {
-    if(!this.state.names || !this.state.names[nameId]) {
+    if (!this.state.names || !this.state.names[nameId]) {
       return {
         name: '...'
       };
     }
     return this.state.names[nameId];
-  }
-
-  currentContent(){
-    if(this.state.currentContestId){
+  };
+  currentContent() {
+    if (this.state.currentContestId) {
       return <Contest
-        contestListClick={this.fetchContestList}
-        fetchNames={this.fetchNames}
-        lookupName={this.lookupName}
-        {...this.currentContest()} />;
+               contestListClick={this.fetchContestList}
+               fetchNames={this.fetchNames}
+               lookupName={this.lookupName}
+               {...this.currentContest()} />;
     }
-    return <ContestList
-      onContestClick={this.fetchContest}
-      contests={this.state.contests} />;
-  }
 
+    return <ContestList
+            onContestClick={this.fetchContest}
+            contests={this.state.contests} />;
+  }
   render() {
     return (
       <div className="App">

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Contest extends Component {
   componentDidMount() {
@@ -61,11 +62,11 @@ class Contest extends Component {
 
 
 Contest.propTypes = {
-  // description: PropTypes.string.isRequired,
-  // contestListClick: PropTypes.func.isRequired,
-  // fetchNames: PropTypes.func.isRequired,
-  // nameIds: PropTypes.array.isRequired,
-  // lookupName: PropTypes.func.isRequired,
+  description: PropTypes.string.isRequired,
+  contestListClick: PropTypes.func.isRequired,
+  fetchNames: PropTypes.func.isRequired,
+  nameIds: PropTypes.array.isRequired,
+  lookupName: PropTypes.func.isRequired,
 }
 
 export default Contest;
