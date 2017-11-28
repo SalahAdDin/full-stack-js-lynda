@@ -17,16 +17,17 @@ server.use(sassMiddleware({
 
 server.set('view engine', 'ejs');
 
-server.get(['/', '/contests/:contestId'], (req, res) => {
+server.get(['/', '/contest/:contestId'], (req, res) => {
   serverRender(req.params.contestId)
     .then(({ initialMarkup, initialData }) => {
       res.render('index', {
-        initialMarkup, initialData
+        initialMarkup,
+        initialData
       });
     })
     .catch(error => {
       console.error(error);
-      res.status(404).send('Bad request')
+      res.status(404).send('Bad Request');
     });
 });
 
