@@ -30,10 +30,10 @@ class App extends Component {
 
     api.fetchContest(contestId).then(contest => {
       this.setState({
-        currentContestId: contest.id,
+        currentContestId: contest._id,
         contest: {
           ...this.state.contest,
-          [contest.id]: contest
+          [contest._id]: contest
         }
       });
     });
